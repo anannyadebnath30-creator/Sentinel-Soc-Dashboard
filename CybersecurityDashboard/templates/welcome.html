@@ -1,0 +1,248 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome | SENTINEL SOC</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='welcome.css') }}">
+</head>
+
+<body class="welcome-page">
+
+    <!-- Navigation -->
+    <nav class="welcome-nav">
+
+        <a href="{{ url_for('welcome') }}" class="welcome-brand">
+
+            <!-- Custom Shield Logo -->
+            <svg class="sentinel-logo"
+                 viewBox="0 0 64 64"
+                 xmlns="http://www.w3.org/2000/svg"
+                 aria-label="SENTINEL SOC shield logo"
+                 role="img">
+
+                <path d="M32 4 L54 13 V29
+                         C54 43 44 54 32 60
+                         C20 54 10 43 10 29 V13 Z"
+                      fill="#102b40"
+                      stroke="#20d5e8"
+                      stroke-width="2.5"/>
+
+                <path d="M32 13 L46 19 V29
+                         C46 39 40 46 32 51
+                         C24 46 18 39 18 29 V19 Z"
+                      fill="none"
+                      stroke="#20d5e8"
+                      stroke-width="1"
+                      opacity="0.55"/>
+
+                <path d="M23 32 L29 38 L42 24"
+                      fill="none"
+                      stroke="#20d5e8"
+                      stroke-width="4"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"/>
+
+            </svg>
+
+            <span class="brand-text">
+                SENTINEL <span class="brand-highlight">SOC</span>
+                <small>SECURITY OPERATIONS</small>
+            </span>
+
+        </a>
+
+        <div class="welcome-nav-links">
+            <a href="{{ url_for('login') }}">Login</a>
+            <a href="{{ url_for('register') }}" class="nav-register">
+                Get Started ↗
+            </a>
+        </div>
+
+    </nav>
+
+
+    <!-- Main Hero Section -->
+    <main class="welcome-main">
+
+        <section class="welcome-content">
+
+            <div class="welcome-badge">
+                <span class="status-dot"></span>
+                CYBERSECURITY MONITORING PLATFORM
+            </div>
+
+            <p class="eyebrow">VISIBILITY. DETECTION. RESPONSE.</p>
+
+            <h1>
+                Your Digital World.
+                <br>
+                <span>Under Watch.</span>
+            </h1>
+
+            <p class="welcome-description">
+                Welcome to SENTINEL SOC — a centralized security
+                monitoring dashboard designed to help you track
+                security events, detect suspicious login activity,
+                and monitor potential cyber threats.
+            </p>
+
+            <div class="welcome-buttons">
+
+                <a href="{{ url_for('login') }}"
+                   class="welcome-btn primary-btn">
+                    Login to Dashboard
+                    <span>→</span>
+                </a>
+
+                <a href="{{ url_for('register') }}"
+                   class="welcome-btn secondary-btn">
+                    Create an Account
+                </a>
+
+            </div>
+
+            <div class="welcome-note">
+                <span class="note-shield">✓</span>
+                Centralized visibility for your security events
+            </div>
+
+            <!-- Feature Cards -->
+            <div class="welcome-features">
+
+                <article class="feature-card">
+                    <div class="feature-icon">⌕</div>
+                    <h3>Threat Detection</h3>
+                    <p>
+                        Identify repeated failed login attempts
+                        and suspicious activity.
+                    </p>
+                </article>
+
+                <article class="feature-card">
+                    <div class="feature-icon">▤</div>
+                    <h3>Security Logs</h3>
+                    <p>
+                        Review security events and filter
+                        records by activity.
+                    </p>
+                </article>
+
+                <article class="feature-card">
+                    <div class="feature-icon">◈</div>
+                    <h3>Incident Tracking</h3>
+                    <p>
+                        Track incident severity and monitor
+                        investigation status.
+                    </p>
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- Security Illustration -->
+        <section class="welcome-visual">
+
+            <div class="orbit orbit-one"></div>
+            <div class="orbit orbit-two"></div>
+            <div class="visual-glow"></div>
+
+            <div class="visual-top-label">
+                <span class="status-dot"></span>
+                SECURITY OPERATIONS CENTER
+            </div>
+
+            <div class="shield-circle">
+
+                <div class="shield-logo-container">
+
+                    <svg viewBox="0 0 100 100"
+                         class="hero-shield"
+                         xmlns="http://www.w3.org/2000/svg"
+                         aria-hidden="true">
+
+                        <path d="M50 7 L86 21 V45
+                                 C86 67 70 84 50 94
+                                 C30 84 14 67 14 45 V21 Z"
+                              fill="#102e43"
+                              stroke="#20d5e8"
+                              stroke-width="2.5"/>
+
+                        <path d="M50 19 L74 28 V45
+                                 C74 61 64 73 50 81
+                                 C36 73 26 61 26 45 V28 Z"
+                              fill="none"
+                              stroke="#20d5e8"
+                              stroke-width="1"
+                              opacity="0.5"/>
+
+                        <path d="M36 49 L46 59 L66 38"
+                              fill="none"
+                              stroke="#20d5e8"
+                              stroke-width="5"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"/>
+
+                    </svg>
+
+                </div>
+
+            </div>
+
+            <div class="visual-caption">
+                <span class="caption-line"></span>
+                <div>
+                    <h2>SENTINEL CORE</h2>
+                    <p>Security Monitoring Interface</p>
+                </div>
+                <span class="caption-line"></span>
+            </div>
+
+
+            <!-- Floating Status Card -->
+            <div class="visual-card card-top">
+                <div class="mini-icon cyan-icon">⌁</div>
+                <div>
+                    <span class="card-label">MONITORING</span>
+                    <strong>Threat Activity</strong>
+                    <p>Review security events</p>
+                </div>
+                <span class="card-dot"></span>
+            </div>
+
+            <div class="visual-card card-bottom">
+                <div class="mini-icon green-icon">✓</div>
+                <div>
+                    <span class="card-label">VISIBILITY</span>
+                    <strong>Event Tracking</strong>
+                    <p>Logs · Alerts · Incidents</p>
+                </div>
+            </div>
+
+            <div class="visual-version">
+                <span>●</span> SENTINEL SOC <span> / </span> DEMO
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="welcome-footer">
+        <div class="footer-brand">
+            <span class="footer-dot"></span>
+            SENTINEL SOC
+        </div>
+
+        <p>Cybersecurity Threat Monitoring Dashboard</p>
+
+        <p>© 2026 SENTINEL SOC · Academic Project</p>
+    </footer>
+
+</body>
+</html>

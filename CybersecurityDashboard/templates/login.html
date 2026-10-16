@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | SENTINEL SOC</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="auth-page">
+
+    <div class="auth-card">
+        <div class="auth-logo">S</div>
+
+        <h1>SENTINEL <span>SOC</span></h1>
+        <p class="auth-subtitle">Security Operations Center</p>
+
+        <h2>Welcome back</h2>
+        <p class="auth-description">
+            Sign in to access your security dashboard.
+        </p>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, message in messages %}
+                <div class="auth-message {{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endwith %}
+
+        <form action="{{ url_for('login') }}" method="POST">
+            <label for="username">Username or Email</label>
+            <input
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Enter your username or email"
+                autocomplete="username"
+                required
+            >
+
+            <label for="password">Password</label>
+            <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Enter your password"
+                autocomplete="current-password"
+                required
+            >
+
+            <button type="submit" class="auth-button">
+                Sign In
+            </button>
+        </form>
+
+        <p class="auth-footer">
+            Don't have an account?
+            <a href="{{ url_for('register') }}">Create account</a>
+        </p>
+    </div>
+
+</body>
+</html>

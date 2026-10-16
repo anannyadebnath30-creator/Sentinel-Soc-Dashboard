@@ -1,0 +1,570 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SENTINEL SOC | Threat Monitoring</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+<div class="container">
+
+    <!-- Dashboard Header -->
+    <header class="dashboard-header">
+
+        <!-- Brand -->
+        <div class="brand">
+            <div class="brand-icon">🛡️</div>
+
+            <div class="brand-text">
+                <h1>SENTINEL SOC</h1>
+                <p>Cybersecurity Threat Monitoring Center</p>
+            </div>
+        </div>
+
+        <!-- Status and User Actions -->
+        <div class="header-actions">
+
+            <div class="system-status">
+                <span class="status-dot"></span>
+                DEMO SYSTEM ONLINE
+            </div>
+
+            <div class="user-actions">
+
+                <span class="welcome-user">
+                    Welcome, {{ full_name | default('User', true) }}!
+                </span>
+
+                <a href="{{ url_for('logout') }}" class="logout-btn">
+                    Logout
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+    <main>
+
+        <!-- Summary Cards -->
+        <section class="summary-cards">
+
+            <div class="metric-card metric-events">
+                <h3>📊 Total Events</h3>
+                <p>{{ total_logs }}</p>
+            </div>
+
+            <div class="metric-card metric-failed">
+                <h3>🔐 Failed Logins</h3>
+                <p>{{ failed_logins }}</p>
+            </div>
+
+            <div class="metric-card metric-success">
+                <h3>✅ Successful Logins</h3>
+                <p>{{ successful_logins }}</p>
+            </div>
+
+            <div class="metric-card metric-alerts">
+                <h3>🚨 Suspicious IPs</h3>
+                <p>{{ alerts | length }}</p>
+            </div>
+
+        </section>
+
+        <!-- Charts -->
+        <section class="charts">
+
+            <div class="card">
+                <h2>📈 Login Activity</h2>
+
+                <div class="chart-container">
+                    <canvas id="loginChart"></canvas>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>⚠️ Threat Severity</h2>
+
+                <div class="chart-container">
+                    <canvas id="severityChart"></canvas>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Add Security Event -->
+        <section class="card">
+
+            <h2>➕ Add Security Event</h2>
+
+            <p>
+                Add a demo event to test automatic threat detection.
+                Three or more failed logins from the same IP trigger an alert.
+            </p>
+
+            <form method="POST" action="{{ url_for('index') }}">
+
+                <input type="hidden" name="action" value="add">
+
+                <label for="ip">🌐 IP Address</label>
+
+                <input
+                    type="text"
+                    id="ip"
+                    name="ip"
+                    placeholder="Example: 192.168.1.50"
+                    required
+                >
+
+                <label for="event">🔎 Event Type</label>
+
+                <select id="event" name="event" required>
+                    <option value="Failed Login">🚨 Failed Login</option>
+                    <option value="Login Successful">✅ Login Successful</option>
+                </select>
+
+                <button type="submit">➕ Add Event</button>
+
+            </form>
+
+        </section>
+
+        <!-- Security Alerts -->
+        <section class="card">
+
+            <h2>🚨 Security Alerts</h2>
+
+            <p>
+                The detection engine checks failed login events grouped by IP.
+                Alerts are generated automatically when an IP reaches
+                three failed attempts in the available demo logs.
+            </p>
+
+            {% if alerts %}
+
+                {% for alert in alerts %}
+
+                    <div class="alert-item">
+
+                        <div class="alert-heading">
+
+                            <strong>🌐 {{ alert.ip }}</strong>
+
+                            <span class="severity-badge severity-{{ alert.severity | lower }}">
+                                {{ alert.severity }}
+                            </span>
+
+                        </div>
+
+                        <p>
+                            <strong>🔑 Failed Attempts:</strong>
+                            {{ alert.attempts }}
+                        </p>
+
+                        <p>
+                            <strong>📌 Current Status:</strong>
+                            {{ alert.status }}
+                        </p>
+
+                        <p>
+                            <strong>🛡️ Detection Rule:</strong>
+                            Repeated failed logins from the same IP address
+                        </p>
+
+                        <form method="POST" action="{{ url_for('index') }}">
+
+                            <input
+                                type="hidden"
+                                name="action"
+                                value="update_status"
+                            >
+
+                            <input
+                                type="hidden"
+                                name="ip"
+                                value="{{ alert.ip }}"
+                            >
+
+                            <label for="status-{{ loop.index }}">
+                                Update Incident Status
+                            </label>
+
+                            <select
+                                id="status-{{ loop.index }}"
+                                name="status"
+                            >
+
+                                <option value="Open"
+                                    {% if alert.status == 'Open' %}selected{% endif %}>
+                                    🔴 Open
+                                </option>
+
+                                <option value="Investigating"
+                                    {% if alert.status == 'Investigating' %}selected{% endif %}>
+                                    🟡 Investigating
+                                </option>
+
+                                <option value="Resolved"
+                                    {% if alert.status == 'Resolved' %}selected{% endif %}>
+                                    🟢 Resolved
+                                </option>
+
+                            </select>
+
+                            <button type="submit">
+                                🔄 Update Status
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                {% endfor %}
+
+            {% else %}
+
+                <p class="empty-state">
+                    ✅ No suspicious IP addresses detected in the current demo data.
+                </p>
+
+            {% endif %}
+
+        </section>
+
+        <!-- Security Event Logs -->
+        <section class="card">
+
+            <h2>📋 Security Event Logs</h2>
+
+            <form
+                method="GET"
+                action="{{ url_for('index') }}"
+                class="filter-form"
+            >
+
+                <input
+                    type="text"
+                    name="search"
+                    placeholder="🔍 Search by IP address"
+                    value="{{ search | default('', true) }}"
+                >
+
+                {% set current_filter = selected_filter | default('all', true) %}
+
+                <select name="filter" aria-label="Filter event logs">
+
+                    <option value="all"
+                        {% if current_filter == 'all' %}selected{% endif %}>
+                        All Events
+                    </option>
+
+                    <option value="failed"
+                        {% if current_filter == 'failed' %}selected{% endif %}>
+                        Failed Logins
+                    </option>
+
+                    <option value="success"
+                        {% if current_filter == 'success' %}selected{% endif %}>
+                        Successful Logins
+                    </option>
+
+                </select>
+
+                <button type="submit">🔍 Search</button>
+
+                <a class="clear-link" href="{{ url_for('index') }}">
+                    ✖ Clear Filters
+                </a>
+
+            </form>
+
+            <!-- CSV Export -->
+            <div class="export-row">
+
+                <a class="export-link" href="{{ url_for('export_csv') }}">
+                    📥 Download CSV Report
+                </a>
+
+            </div>
+
+            <!-- Logs Table -->
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>🕒 Time</th>
+                            <th>🌐 IP Address</th>
+                            <th>🔎 Event</th>
+                            <th>📌 Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        {% for log in logs %}
+
+                            <tr>
+                                <td>{{ log.time }}</td>
+                                <td>{{ log.ip }}</td>
+                                <td>{{ log.event }}</td>
+                                <td>{{ log.status }}</td>
+                            </tr>
+
+                        {% else %}
+
+                            <tr>
+                                <td colspan="4" class="empty-state">
+                                    No events found.
+                                </td>
+                            </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+        <!-- Reset Dashboard -->
+        <section class="card reset-card">
+
+            <h2>🔄 Reset Dashboard</h2>
+
+            <p>
+                Restore the dashboard's sample events and clear incident statuses.
+            </p>
+
+            <form
+                method="POST"
+                action="{{ url_for('index') }}"
+                onsubmit="return confirm('Reset all demo events?');"
+            >
+
+                <input type="hidden" name="action" value="reset">
+
+                <button type="submit" class="danger-button">
+                    🔄 Reset Demo Data
+                </button>
+
+            </form>
+
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="dashboard-footer">
+
+        <p>🛡️ SENTINEL SOC | Cybersecurity Monitoring Dashboard</p>
+
+        <p>
+            Educational demo • Sample data only • Not live threat detection
+        </p>
+
+    </footer>
+
+</div>
+
+<!-- Flask Data for Charts -->
+<script id="chart-data" type="application/json">
+{{ {
+    "failed_logins": failed_logins,
+    "successful_logins": successful_logins,
+    "severity_labels": severity_labels,
+    "severity_values": severity_values
+} | tojson }}
+</script>
+
+<!-- Chart.js -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const chartData = JSON.parse(
+        document.getElementById("chart-data").textContent
+    );
+
+    const failedLogins = chartData.failed_logins;
+    const successfulLogins = chartData.successful_logins;
+    const severityLabels = chartData.severity_labels;
+    const severityValues = chartData.severity_values;
+
+    if (typeof Chart === "undefined") {
+        console.error(
+            "Chart.js did not load. Check your internet connection."
+        );
+        return;
+    }
+
+    /* Login Activity Chart */
+
+    const loginCanvas = document.getElementById("loginChart");
+
+    if (loginCanvas) {
+
+        new Chart(loginCanvas, {
+
+            type: "doughnut",
+
+            data: {
+
+                labels: [
+                    "Failed Logins",
+                    "Successful Logins"
+                ],
+
+                datasets: [{
+
+                    data: [
+                        failedLogins,
+                        successfulLogins
+                    ],
+
+                    backgroundColor: [
+                        "#ff647c",
+                        "#40e0a0"
+                    ],
+
+                    borderColor: [
+                        "#101827",
+                        "#101827"
+                    ],
+
+                    borderWidth: 3,
+                    hoverOffset: 8
+
+                }]
+
+            },
+
+            options: {
+
+                responsive: true,
+                maintainAspectRatio: false,
+
+                plugins: {
+
+                    legend: {
+
+                        position: "bottom",
+
+                        labels: {
+                            color: "#d4e0ef",
+                            padding: 20
+                        }
+
+                    }
+
+                }
+
+            }
+
+        });
+
+    }
+
+    /* Threat Severity Chart */
+
+    const severityCanvas = document.getElementById("severityChart");
+
+    if (severityCanvas) {
+
+        new Chart(severityCanvas, {
+
+            type: "bar",
+
+            data: {
+
+                labels: severityLabels,
+
+                datasets: [{
+
+                    label: "Suspicious IP Addresses",
+                    data: severityValues,
+
+                    backgroundColor: [
+                        "#ff647c",
+                        "#ff9f43",
+                        "#ffd166",
+                        "#6495ff"
+                    ],
+
+                    borderRadius: 6,
+                    maxBarThickness: 55
+
+                }]
+
+            },
+
+            options: {
+
+                responsive: true,
+                maintainAspectRatio: false,
+
+                scales: {
+
+                    x: {
+
+                        ticks: {
+                            color: "#aebed3"
+                        },
+
+                        grid: {
+                            display: false
+                        }
+
+                    },
+
+                    y: {
+
+                        beginAtZero: true,
+
+                        ticks: {
+                            precision: 0,
+                            color: "#aebed3"
+                        },
+
+                        grid: {
+                            color: "rgba(127, 145, 170, 0.15)"
+                        }
+
+                    }
+
+                },
+
+                plugins: {
+
+                    legend: {
+
+                        labels: {
+                            color: "#d4e0ef"
+                        }
+
+                    }
+
+                }
+
+            }
+
+        });
+
+    }
+
+});
+</script>
+
+</body>
+</html>

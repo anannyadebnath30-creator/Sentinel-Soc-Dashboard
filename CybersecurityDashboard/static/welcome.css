@@ -1,0 +1,674 @@
+
+/* ========================================
+   SENTINEL SOC - WELCOME PAGE
+======================================== */
+
+.welcome-page {
+    margin: 0;
+    min-height: 100vh;
+    color: #e8f0fa;
+    font-family: Arial, sans-serif;
+    background:
+        radial-gradient(ellipse at 75% 30%, #102d47 0%, transparent 40%),
+        radial-gradient(ellipse at 10% 90%, #0c2437 0%, transparent 35%),
+        #080f1c;
+}
+
+.welcome-page * {
+    box-sizing: border-box;
+}
+
+.welcome-page a {
+    text-decoration: none;
+}
+
+
+/* NAVIGATION */
+
+.welcome-nav {
+    max-width: 1250px;
+    margin: auto;
+    padding: 23px 38px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.welcome-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #f0f6ff;
+}
+
+.sentinel-logo {
+    width: 48px;
+    height: 48px;
+    filter: drop-shadow(0 0 10px #20d5e822);
+}
+
+.brand-text {
+    font-size: 19px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.brand-highlight {
+    color: #20d5e8;
+}
+
+.brand-text small {
+    display: block;
+    margin-top: 4px;
+    color: #8296ad;
+    font-size: 8px;
+    font-weight: normal;
+    letter-spacing: 2px;
+}
+
+.welcome-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.welcome-nav-links a {
+    color: #cbd7e6;
+    font-size: 13px;
+    transition: 0.2s;
+}
+
+.welcome-nav-links a:hover {
+    color: #20d5e8;
+}
+
+.welcome-nav-links .nav-register {
+    padding: 11px 17px;
+    border: 1px solid #20d5e8;
+    border-radius: 7px;
+    color: #20d5e8;
+}
+
+.nav-register:hover {
+    background: #20d5e811;
+}
+
+
+/* MAIN LAYOUT */
+
+.welcome-main {
+    max-width: 1250px;
+    min-height: 620px;
+    margin: auto;
+    padding: 55px 38px 65px;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+    gap: 35px;
+}
+
+.welcome-content {
+    max-width: 650px;
+}
+
+.welcome-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 10px 13px;
+    border: 1px solid #25465d;
+    border-radius: 30px;
+    background: #0d1c2bcc;
+    color: #a9c3d9;
+    font-size: 9px;
+    letter-spacing: 1px;
+}
+
+.status-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #20d5a0;
+    box-shadow: 0 0 9px #20d5a066;
+}
+
+.eyebrow {
+    margin: 28px 0 12px;
+    color: #20d5e8;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+
+.welcome-content h1 {
+    margin: 0;
+    font-size: clamp(40px, 5vw, 64px);
+    line-height: 1.12;
+    letter-spacing: -2px;
+}
+
+.welcome-content h1 span {
+    color: #20d5e8;
+}
+
+.welcome-description {
+    max-width: 530px;
+    margin-top: 22px;
+    color: #9babc0;
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+
+/* BUTTONS */
+
+.welcome-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 28px;
+}
+
+.welcome-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 14px 17px;
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: bold;
+    transition: 0.2s ease;
+}
+
+.primary-btn {
+    background: #20d5e8;
+    color: #06121d;
+    box-shadow: 0 6px 24px #20d5e81c;
+}
+
+.primary-btn:hover {
+    background: #70edf5;
+    transform: translateY(-2px);
+}
+
+.secondary-btn {
+    border: 1px solid #344b64;
+    background: #0b1726;
+    color: #e8f0fa;
+}
+
+.secondary-btn:hover {
+    border-color: #20d5e8;
+    color: #20d5e8;
+}
+
+.welcome-note {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-top: 22px;
+    color: #8296ad;
+    font-size: 11px;
+}
+
+.note-shield {
+    color: #20d5a0;
+    font-size: 15px;
+}
+
+
+/* FEATURE CARDS */
+
+.welcome-features {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 36px;
+}
+
+.feature-card {
+    padding: 15px 12px;
+    border: 1px solid #20374b;
+    border-radius: 10px;
+    background: linear-gradient(145deg, #102033, #0b1523);
+    transition: border-color 0.2s, transform 0.2s;
+}
+
+.feature-card:hover {
+    border-color: #20d5e866;
+    transform: translateY(-3px);
+}
+
+.feature-icon {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #245066;
+    border-radius: 8px;
+    background: #103044;
+    color: #20d5e8;
+    font-size: 21px;
+}
+
+.feature-card h3 {
+    margin: 13px 0 8px;
+    font-size: 12px;
+}
+
+.feature-card p {
+    margin: 0;
+    color: #8296ad;
+    font-size: 10px;
+    line-height: 1.7;
+}
+
+
+/* RIGHT-SIDE LOGO VISUAL */
+
+.welcome-visual {
+    min-height: 450px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    isolation: isolate;
+}
+
+.visual-glow {
+    position: absolute;
+    z-index: -1;
+    width: 290px;
+    height: 290px;
+    border-radius: 50%;
+    background: #0c8bb133;
+    filter: blur(55px);
+}
+
+.orbit {
+    position: absolute;
+    border: 1px solid #20d5e822;
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.orbit-one {
+    width: 350px;
+    height: 350px;
+}
+
+.orbit-two {
+    width: 430px;
+    height: 430px;
+    border-style: dashed;
+    border-color: #20d5e814;
+}
+
+.visual-top-label {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 23px;
+    color: #9babc0;
+    font-size: 9px;
+    letter-spacing: 2px;
+}
+
+.shield-circle {
+    width: 235px;
+    height: 235px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #20d5e84a;
+    border-radius: 50%;
+    background: radial-gradient(circle, #14344b 0%, #0b1928 70%);
+    box-shadow:
+        0 0 45px #20d5e814,
+        inset 0 0 40px #20d5e80a;
+}
+
+.shield-logo-container {
+    width: 145px;
+    height: 145px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #20d5e84a;
+    border-radius: 32px;
+    background: #102538;
+    box-shadow: 0 0 35px #20d5e81a;
+    transform: rotate(45deg);
+}
+
+.hero-shield {
+    width: 115px;
+    height: 115px;
+    filter: drop-shadow(0 0 10px #20d5e822);
+    transform: rotate(-45deg);
+}
+
+.visual-caption {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 24px;
+    text-align: center;
+}
+
+.visual-caption h2 {
+    margin: 0;
+    font-size: 13px;
+    letter-spacing: 3px;
+}
+
+.visual-caption p {
+    margin: 7px 0 0;
+    color: #8296ad;
+    font-size: 10px;
+}
+
+.caption-line {
+    width: 27px;
+    height: 1px;
+    background: #20d5e866;
+}
+
+
+/* FLOATING CARDS */
+
+.visual-card {
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 13px;
+    border: 1px solid #28435a;
+    border-radius: 10px;
+    background: #101e2ef2;
+    box-shadow: 0 12px 35px #00000030;
+}
+
+.card-top {
+    top: 35px;
+    right: -4px;
+}
+
+.card-bottom {
+    bottom: 25px;
+    left: -4px;
+}
+
+.mini-icon {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-size: 21px;
+}
+
+.cyan-icon {
+    background: #103b49;
+    color: #20d5e8;
+}
+
+.green-icon {
+    background: #10392f;
+    color: #20d5a0;
+}
+
+.card-label {
+    display: block;
+    margin-bottom: 5px;
+    color: #8296ad;
+    font-size: 8px;
+    letter-spacing: 1px;
+}
+
+.visual-card strong {
+    display: block;
+    font-size: 11px;
+}
+
+.visual-card p {
+    margin: 5px 0 0;
+    color: #8296ad;
+    font-size: 9px;
+}
+
+.card-dot {
+    width: 6px;
+    height: 6px;
+    margin-left: 5px;
+    border-radius: 50%;
+    background: #20d5a0;
+}
+
+.visual-version {
+    position: absolute;
+    bottom: -20px;
+    color: #63788e;
+    font-size: 9px;
+    letter-spacing: 1px;
+}
+
+.visual-version span {
+    color: #20d5e8;
+}
+
+
+/* FOOTER */
+
+.welcome-footer {
+    max-width: 1250px;
+    margin: auto;
+    padding: 20px 38px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    border-top: 1px solid #1c2d40;
+    color: #71849a;
+    font-size: 10px;
+}
+
+.footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #b8c9da;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.footer-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #20d5e8;
+}
+
+.welcome-footer p {
+    margin: 0;
+}
+
+
+/* RESPONSIVE DESIGN */
+
+@media (max-width: 950px) {
+    .welcome-main {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding-top: 40px;
+    }
+
+    .welcome-content {
+        max-width: 700px;
+    }
+
+    .welcome-visual {
+        min-height: 460px;
+    }
+
+    .card-top {
+        right: 8%;
+    }
+
+    .card-bottom {
+        left: 8%;
+    }
+}
+
+@media (max-width: 560px) {
+    .welcome-nav {
+        padding: 18px;
+    }
+
+    .sentinel-logo {
+        width: 39px;
+        height: 39px;
+    }
+
+    .brand-text {
+        font-size: 15px;
+    }
+
+    .brand-text small {
+        font-size: 7px;
+        letter-spacing: 1px;
+    }
+
+    .welcome-nav-links {
+        gap: 12px;
+    }
+
+    .welcome-nav-links a {
+        font-size: 11px;
+    }
+
+    .welcome-nav-links .nav-register {
+        padding: 9px 10px;
+    }
+
+    .welcome-main {
+        padding: 35px 18px 55px;
+    }
+
+    .welcome-content h1 {
+        font-size: 42px;
+        letter-spacing: -1px;
+    }
+
+    .welcome-description {
+        font-size: 13px;
+    }
+
+    .welcome-features {
+        grid-template-columns: 1fr;
+    }
+
+    .feature-card {
+        display: grid;
+        grid-template-columns: 38px 1fr;
+        column-gap: 10px;
+        align-items: center;
+    }
+
+    .feature-icon {
+        grid-row: span 2;
+    }
+
+    .feature-card h3 {
+        margin: 0 0 5px;
+    }
+
+    .welcome-visual {
+        min-height: 380px;
+    }
+
+    .orbit-one {
+        width: 280px;
+        height: 280px;
+    }
+
+    .orbit-two {
+        width: 330px;
+        height: 330px;
+    }
+
+    .shield-circle {
+        width: 190px;
+        height: 190px;
+    }
+
+    .shield-logo-container {
+        width: 120px;
+        height: 120px;
+    }
+
+    .hero-shield {
+        width: 95px;
+        height: 95px;
+    }
+
+    .visual-card {
+        padding: 9px;
+        gap: 7px;
+    }
+
+    .card-top {
+        top: 15px;
+        right: 0;
+    }
+
+    .card-bottom {
+        bottom: 10px;
+        left: 0;
+    }
+
+    .mini-icon {
+        width: 29px;
+        height: 29px;
+    }
+
+    .visual-version {
+        bottom: -17px;
+    }
+
+    .welcome-footer {
+        padding: 18px;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .welcome-footer p {
+        width: 100%;
+    }
+}
+
+
+
+/* Match the Login button with Get Started */
+
+.welcome-nav-links a[href*="login"] {
+    padding: 11px 17px;
+    border: 1px solid #20d5e8;
+    border-radius: 7px;
+    color: #20d5e8;
+    transition: background 0.2s ease;
+}
+
+.welcome-nav-links a[href*="login"]:hover {
+    background: #20d5e811;
+}
